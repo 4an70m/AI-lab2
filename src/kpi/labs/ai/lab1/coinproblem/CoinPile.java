@@ -29,6 +29,10 @@ public class CoinPile {
         if (!this.pile.isEmpty()) {
             result = this.pile.pop();
         }
+        if (result.wasCoinMoved()) {
+
+        }
+        result.moveCoin();
         return result;
     }
 
@@ -54,5 +58,13 @@ public class CoinPile {
     @Override
     public int hashCode() {
         return pile.hashCode();
+    }
+
+    public boolean hasCoin() {
+        return !pile.isEmpty();
+    }
+
+    public Coin peekCoin() {
+        return pile.peekLast();
     }
 }

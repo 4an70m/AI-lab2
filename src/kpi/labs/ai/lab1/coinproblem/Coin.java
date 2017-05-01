@@ -7,9 +7,23 @@ public class Coin {
 
     private static int counter = 0;
     private String name;
+    private Boolean wasCoinMoved;
 
     public Coin() {
         this.name = "Coin-" + String.valueOf(++counter);
+        this.wasCoinMoved = false;
+    }
+
+    public Boolean wasCoinMoved() {
+        return wasCoinMoved;
+    }
+
+    public void moveCoin() {
+        this.wasCoinMoved = true;
+    }
+
+    public void setWasCoinMoved(Boolean wasCoinMoved) {
+        this.wasCoinMoved = wasCoinMoved;
     }
 
     @Override

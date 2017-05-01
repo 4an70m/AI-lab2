@@ -1,7 +1,6 @@
 package kpi.labs.ai.lab1.coinproblem;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 4an70m on 09.04.2017.
@@ -9,6 +8,8 @@ import java.util.Map;
 public class CoinPileChain {
 
     public static final int SHIFT_SIZE = 3;
+    public static final int DESIRED_PILE_SIZE = 3;
+    public static final int DESIRED_PILE_AMOUNT = 5;
 
     private int chainSize;
     private Map<Integer, CoinPile> chain;
@@ -66,5 +67,31 @@ public class CoinPileChain {
     @Override
     public String toString() {
         return "\n" + chain;
+    }
+
+    public boolean isRequirementsMet() {
+        int counter = 0;
+        for (CoinPile pile : chain.values()) {
+            if (pile.pileSize() == DESIRED_PILE_SIZE) {
+                counter++;
+            }
+            if (pile.pileSize() == 0) {
+                continue;
+            }
+            return false;
+        }
+        return counter == DESIRED_PILE_AMOUNT;
+    }
+
+    public Collection<CoinPile> getPiles() {
+        return chain.values();
+    }
+
+    public Map<Integer, CoinPile> getPilesByNumber() {
+        return chain;
+    }
+
+    public CoinPile getPile(Integer pileNumber) {
+        return this.chain.get(pileNumber);
     }
 }
