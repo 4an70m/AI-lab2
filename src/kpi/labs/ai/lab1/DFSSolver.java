@@ -11,20 +11,23 @@ import java.util.List;
 public class DFSSolver {
     private List<Integer> stacks;
     private LinkedList<HistoryPoint> history;
-    private static final int STEP = 2;
-    private static final int STACK_SIZE = 1;
+    private static final int STEP = 3;
+    private static final int STACK_SIZE = 2;
 
     class HistoryPoint {
         private final List<Integer> stack;
+        private final int index;
 
-        public HistoryPoint(List<Integer> stack) {
+        public HistoryPoint(List<Integer> stack, int index) {
             this.stack = new ArrayList<>(stack);
+            this.index = index;
         }
 
         @Override
         public String toString() {
             return "HistoryPoint{" +
                     "stack=" + stack +
+                    ", index=" + index +
                     '}';
         }
 
@@ -40,7 +43,7 @@ public class DFSSolver {
     public DFSSolver(List<Integer> stacks) {
         this.stacks = stacks;
         this.history = new LinkedList<>();
-        this.history.add(new HistoryPoint(stacks));
+        this.history.add(new HistoryPoint(stacks, 0));
     }
 
     private int getNextAvailable(int startIndex) {
@@ -53,10 +56,11 @@ public class DFSSolver {
     }
 
     private boolean canMoveLeft(int index) {
-        if (index >= stacks.size() || index < 0 || index - STEP < 0) {
+        if (index >= stacks.size() || index < 0 || index - STEP < 0 || stacks.get(index) != 1) {
             return false;
         }
-        int coins = stacks.get(index - STEP);
+
+        int coins = stacks.get(index - STEP) + 1;
         if (coins > STACK_SIZE) {
             return false;
         }
@@ -74,10 +78,10 @@ public class DFSSolver {
     }
 
     private boolean canMoveRight(int index) {
-        if (index >= stacks.size() || index < 0 || index + STEP >= stacks.size()) {
+        if (index >= stacks.size() || index < 0 || index + STEP >= stacks.size() || stacks.get(index) != 1) {
             return false;
         }
-        int coins = stacks.get(index + STEP);
+        int coins = stacks.get(index + STEP) + 1;
         if (coins > STACK_SIZE) {
             return false;
         }
@@ -94,48 +98,31 @@ public class DFSSolver {
         return true;
     }
 
-    public void solve2(int q) {
-        int startIndex = 0;
-
-        while (true) {
-            System.out.println(stacks);
-            int index = getNextAvailable(startIndex);
-            if (index == -1) {
-                stacks = history.pop().stack;
-                startIndex = 0;
-                continue;
-            }
-            if (moveLeft(index) || moveRight(index)) {
-                history.push(new HistoryPoint(stacks));
-            }
-            startIndex++;
-        }
-    }
-
     public void solve(int startIndex) {
         System.out.println(stacks);
         int index = getNextAvailable(startIndex);
 
         if (moveLeft(index)) {
-            history.push(new HistoryPoint(stacks));
-            solve(startIndex + 1);
+            history.push(new HistoryPoint(stacks, index + STEP));
+            solve(startIndex);
         }
 
         if (moveRight(index)) {
-            history.push(new HistoryPoint(stacks));
-            solve(startIndex + 1);
+            history.push(new HistoryPoint(stacks, index + STEP));
+            solve(startIndex);
         }
 
         if (index == -1) {
             history.pop();
             HistoryPoint hp = history.peek();
             stacks = hp.getStack();
+            solve(hp.getIndex() + 1);
         }
     }
 
     public static void main(String[] args) {
         List<Integer> stacks = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 10; i++) {
             stacks.add(1);
         }
         DFSSolver t = new DFSSolver(stacks);
