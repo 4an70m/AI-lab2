@@ -8,24 +8,24 @@ import java.util.Queue;
  */
 public class CoinsShiftProblem {
 
-    public void bfsResultSearch(CoinPileChain coinPileChain) {
-        bfsResultSearch(coinPileChain);
-    }
+//    public void bfsResultSearch(CoinPileChain coinPileChain) {
+//        bfsResultSearch(coinPileChain);
+//    }
 
-    public ActionSequence bfsResultSearch(CoinPileChain coinPileChain) {
-        if(coinPileChain.isRequirementsMet()) return null;
-        coinPileChain.shiftCoinLeft(1);
-    }
-
-    public void dsfResultSearch() {
-    }
-
-
-    public void weightfunctionAStartResultSearch() {
-
-
-
-    }
+//    public ActionSequence bfsResultSearch(CoinPileChain coinPileChain) {
+//        if(coinPileChain.isRequirementsMet()) return null;
+//        coinPileChain.shiftCoinLeft(1);
+//    }
+//
+//    public void dsfResultSearch() {
+//    }
+//
+//
+//    public void weightfunctionAStartResultSearch() {
+//
+//
+//
+//    }
 
 
 }
