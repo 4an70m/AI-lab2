@@ -15,19 +15,16 @@ public class DFSSolver {
     private static final int STACK_SIZE = 1;
 
     class HistoryPoint {
-        private int index;
         private final List<Integer> stack;
 
-        public HistoryPoint(int index, List<Integer> stack) {
-            this.index = index;
+        public HistoryPoint(List<Integer> stack) {
             this.stack = new ArrayList<>(stack);
         }
 
         @Override
         public String toString() {
             return "HistoryPoint{" +
-                    "index=" + index +
-                    ", stack=" + stack +
+                    "stack=" + stack +
                     '}';
         }
 
@@ -43,7 +40,7 @@ public class DFSSolver {
     public DFSSolver(List<Integer> stacks) {
         this.stacks = stacks;
         this.history = new LinkedList<>();
-        this.history.add(new HistoryPoint(0, stacks));
+        this.history.add(new HistoryPoint(stacks));
     }
 
     private int getNextAvailable(int startIndex) {
@@ -109,7 +106,7 @@ public class DFSSolver {
                 continue;
             }
             if (moveLeft(index) || moveRight(index)) {
-                history.push(new HistoryPoint(0, stacks));
+                history.push(new HistoryPoint(stacks));
             }
             startIndex++;
         }
@@ -120,17 +117,17 @@ public class DFSSolver {
         int index = getNextAvailable(startIndex);
 
         if (moveLeft(index)) {
-            history.push(new HistoryPoint(index, stacks));
+            history.push(new HistoryPoint(stacks));
             solve(startIndex + 1);
         }
 
         if (moveRight(index)) {
-            history.push(new HistoryPoint(index, stacks));
+            history.push(new HistoryPoint(stacks));
             solve(startIndex + 1);
         }
 
         if (index == -1) {
-            HistoryPoint temp = history.pop();
+            history.pop();
             HistoryPoint hp = history.peek();
             stacks = hp.getStack();
         }
