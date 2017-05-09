@@ -1,4 +1,4 @@
-package kpi.labs.ai.lab1.coinproblem;
+package kpi.labs.ai.lab1.deprecated;
 
 import java.util.*;
 

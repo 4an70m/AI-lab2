@@ -1,4 +1,4 @@
-package kpi.labs.ai.lab1.coinproblem;
+package kpi.labs.ai.lab1.deprecated;
 
 /**
  * Created by 4an70m on 09.04.2017.

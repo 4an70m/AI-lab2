@@ -1,8 +1,7 @@
-package kpi.labs.ai.lab1.coinproblem;
+package kpi.labs.ai.lab1.deprecated;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Iterator;
 
 /**
  * Created by 4an70m on 09.04.2017.

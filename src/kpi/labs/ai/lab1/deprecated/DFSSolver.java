@@ -1,7 +1,6 @@
-package kpi.labs.ai.lab1;
+package kpi.labs.ai.lab1.deprecated;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class DFSSolver {
 
         @Override
         public String toString() {
-            return "HistoryPoint{" +
+            return "State{" +
                     "stack=" + stack +
                     ", index=" + index +
                     '}';

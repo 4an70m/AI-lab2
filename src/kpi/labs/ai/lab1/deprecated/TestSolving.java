@@ -1,4 +1,4 @@
-package kpi.labs.ai.lab1;
+package kpi.labs.ai.lab1.deprecated;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
