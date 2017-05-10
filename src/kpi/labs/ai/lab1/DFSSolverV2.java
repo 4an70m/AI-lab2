@@ -1,7 +1,9 @@
 package kpi.labs.ai.lab1;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by 4an70m on 10.05.2017.
@@ -94,14 +96,31 @@ public class DFSSolverV2 {
         }
     }
 
-    public void solve(State state) {
+    public void solveDFS(State state) {
         for (State newState : state.getNewState()) {
             System.out.println(newState);
             if (isSolved(newState)) {
                 System.out.println("Solved");
                 System.exit(0);
             }
-            solve(newState);
+            solveDFS(newState);
+        }
+    }
+
+    public void solveBFS(State state) {
+        Queue<State> agenda = new LinkedList<>();
+        agenda.add(state);
+
+        while (!agenda.isEmpty()) {
+            State curState = (State) agenda.remove();
+            for (State newState : curState.getNewState()) {
+                System.out.println(newState);
+                if (isSolved(state)) {
+                    System.out.println("Solved");
+                    System.exit(0);
+                }
+                agenda.addAll(newState.getNewState());
+            }
         }
     }
 
@@ -126,7 +145,8 @@ public class DFSSolverV2 {
 
         State st = new State(curentStack);
         DFSSolverV2 dv2 = new DFSSolverV2();
-        dv2.solve(st);
+        dv2.solveDFS(st);
+        //dv2.solveBFS(st);
     }
 
 }
