@@ -1,9 +1,6 @@
 package kpi.labs.ai.lab1;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by 4an70m on 10.05.2017.
@@ -94,6 +91,21 @@ public class DFSSolverV2 {
         public List<Integer> getCurentState() {
             return new ArrayList<>(this.curentState);
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            State state = (State) o;
+
+            return curentState.equals(state.curentState);
+        }
+
+        @Override
+        public int hashCode() {
+            return curentState.hashCode();
+        }
     }
 
     public void solveDFS(State state) {
@@ -113,14 +125,16 @@ public class DFSSolverV2 {
 
         while (!agenda.isEmpty()) {
             State curState = (State) agenda.remove();
+            Set<State> st = new HashSet<>(agenda);
             for (State newState : curState.getNewState()) {
-                System.out.println(newState);
+                //System.out.println(newState);
                 if (isSolved(state)) {
                     System.out.println("Solved");
-                    System.exit(0);
+                    return;
                 }
-                agenda.addAll(newState.getNewState());
+                st.addAll(newState.getNewState());
             }
+            agenda = new LinkedList<>(st);
         }
     }
 
@@ -145,8 +159,8 @@ public class DFSSolverV2 {
 
         State st = new State(curentStack);
         DFSSolverV2 dv2 = new DFSSolverV2();
-        dv2.solveDFS(st);
-        //dv2.solveBFS(st);
+        //dv2.solveDFS(st);
+        dv2.solveBFS(st);
     }
 
 }
